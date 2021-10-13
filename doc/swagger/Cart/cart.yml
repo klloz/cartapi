@@ -1,0 +1,159 @@
+swagger: '2.0'
+info:
+  title: CartApi
+  version: 1.0.0
+  contact:
+    email: kl.lozowska@gmail.com
+basePath: /api
+tags:
+  - name: Cart
+schemes:
+  - http
+  - https
+paths:
+  /cart:
+    post:
+      summary: Add new cart
+      operationId: createCart
+      tags:
+        - Cart
+      parameters:
+        - name: content
+          description: Cart attributes
+          in: body
+          schema:
+            $ref: '#/definitions/CreateCart'
+      responses:
+        '200':
+          description: Cart created.
+  /cart/{id}:
+    get:
+      summary: Cart details
+      operationId: cartDetails
+      tags:
+        - Cart
+      parameters:
+        - name: id
+          description: Cart ID
+          type: integer
+          in: path
+          required: true
+      responses:
+        '200':
+          description: Cart details.
+          schema:
+            $ref: '#/definitions/CartDetailsView'
+  /cart/{cartId}/product/{productId}:
+    post:
+      summary: Add product to cart
+      operationId: addProductToCart
+      tags:
+        - Cart
+      parameters:
+        - name: cartId
+          description: Cart ID
+          type: integer
+          in: path
+          required: true
+        - name: productId
+          description: Product ID
+          type: integer
+          in: path
+          required: true
+        - name: content
+          description: CartProduct attributes
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddProductToCart'
+      responses:
+        '200':
+          description: Cart created.
+    delete:
+      summary: Remove product from cart
+      operationId: removeProductFromCart
+      tags:
+        - Cart
+      parameters:
+        - name: cartId
+          description: Cart ID
+          type: integer
+          in: path
+          required: true
+        - name: productId
+          description: Product ID
+          type: integer
+          in: path
+          required: true
+        - name: content
+          description: CartProduct attributes
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveProductFromCart'
+      responses:
+        '200':
+          description: Cart created.
+definitions:
+  CreateCart:
+    title: CreateCart
+    description: Create new cart
+    properties:
+      uuid:
+        title: Universally unique identifier
+        type: string
+  AddProductToCart:
+    title: AddProductToCart
+    description: Add product to cart
+    properties:
+      cartId:
+        title: Cart ID
+        type: integer
+      productId:
+        title: Product ID
+        type: integer
+  RemoveProductFromCart:
+    title: RemoveProductFromCart
+    description: Remove product from cart
+    properties:
+      cartId:
+        title: Cart ID
+        type: integer
+      productId:
+        title: Product ID
+        type: integer
+  CartDetailsView:
+    title: CartDetailsView
+    description: Cart details view model
+    properties:
+      totalCount:
+        title: Number of products in cart
+        type: integer
+      totalPrice:
+        title: Total price of products in cart
+        type: number
+      products:
+        title: Products in cart
+        type: array
+        items:
+          $ref: '#/definitions/CartDetailsProductView'
+  CartDetailsProductView:
+    title: CartDetailsProductView
+    description: Product in cart view
+    properties:
+      id:
+        title: Product ID
+        type: integer
+      title:
+        title: Product name
+        type: string
+      price:
+        title: Product price
+        type: number
+      currency:
+        title: Product currency
+        type: string
+      quantity:
+        title: Product quantity in cart
+        type: integer
+

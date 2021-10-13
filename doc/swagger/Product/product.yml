@@ -1,0 +1,144 @@
+swagger: '2.0'
+info:
+  title: CartApi
+  version: 1.0.0
+  contact:
+    email: kl.lozowska@gmail.com
+basePath: /api
+tags:
+  - name: Product
+schemes:
+  - http
+  - https
+paths:
+  /product:
+    get:
+      summary: List of products
+      operationId: ProductListQuery
+      tags:
+        - Product
+      responses:
+        '200':
+          description: List of products
+          schema:
+            $ref: '#/definitions/ProductListView'
+
+    post:
+      summary: Add new product
+      operationId: createProduct
+      tags:
+        - Product
+      parameters:
+        - name: content
+          in: body
+          description: Product attributes
+          schema:
+            $ref: '#/definitions/CreateProduct'
+      responses:
+        '200':
+          description: Product created.
+  /product/{id}:
+    put:
+      summary: Edit product
+      operationId: editProduct
+      tags:
+        - Product
+      parameters:
+        - name: id
+          description: Product ID
+          type: number
+          in: path
+          required: true
+        - name: content
+          in: body
+          description: Product editable attributes
+          schema:
+            $ref: '#/definitions/EditProduct'
+      responses:
+        '200':
+          description: Product created.
+    delete:
+      summary: Remove product with given ID
+      operationId: removeProduct
+      tags:
+        - Product
+      parameters:
+        -   name: id
+            description: Product ID
+            type: number
+            in: path
+            required: true
+        -   name: content
+            description: Product ID
+            in: body
+            required: true
+            schema:
+              $ref: '#/definitions/RemoveProduct'
+      responses:
+        '200':
+          description: Product removed.
+definitions:
+  CreateProduct:
+    title: CreateProduct
+    description: Create new product
+    properties:
+      uuid:
+        title: Universally unique identifier
+        type: string
+      title:
+        title: Product title
+        type: string
+      price:
+        title: Product price
+        type: number
+      currency:
+        title: Product price currency
+        type: string
+  EditProduct:
+    title: EditProduct
+    description: Edit product
+    properties:
+      id:
+        title: Product ID
+        type: number
+      title:
+        title: Product title
+        type: string
+      price:
+        title: Product price
+        type: number
+  RemoveProduct:
+    title: RemoveProduct
+    description: Remove product
+    properties:
+      id:
+        title: Product ID
+        type: number
+  ProductListView:
+    title: ProductListView
+    description: List of products
+    properties:
+      totalCount:
+        title: Total count of products
+        type: integer
+      data:
+        title: Product
+        type: array
+        items:
+          $ref: '#/definitions/ProductListItemView'
+  ProductListItemView:
+    title: ProductListItemView
+    description: Product
+    properties:
+      id:
+        title: Product ID
+        type: integer
+      title:
+        title: Product title
+        type: string
+      price:
+        title: Product price
+        type: number
+      currency:
+        title: Product price currency
+        type: string

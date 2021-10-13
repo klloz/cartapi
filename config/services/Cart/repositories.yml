@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Domain\Cart\Carts: '@App\Infrastructure\Cart\DoctrineCarts'
+
+  App\Domain\Cart\CartProducts: '@App\Infrastructure\Cart\DoctrineCartProducts'

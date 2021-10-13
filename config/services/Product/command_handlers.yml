@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Application\Product\Command\CreateProductHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  App\Application\Product\Command\RemoveProductHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  App\Application\Product\Command\EditProductHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }

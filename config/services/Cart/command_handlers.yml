@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Application\Cart\Command\CreateCartHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  App\Application\Cart\Command\AddProductToCartHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  App\Application\Cart\Command\RemoveProductFromCartHandler:
+    tags:
+      - { name: tactician.handler, typehints: true }

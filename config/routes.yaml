@@ -1,0 +1,10 @@
+api_controllers_product:
+  resource: '../src/UI/Product/Controller/Rest/'
+  type: annotation
+  prefix: /api
+
+api_controllers_cart:
+  resource: '../src/UI/Cart/Controller/Rest/'
+  type: annotation
+  prefix: /api
+
