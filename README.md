@@ -1,5 +1,8 @@
 # Software Engineer (PHP) assignment
 
+## Description: 
+See [assignment](doc/assignment.md).
+
 ## Run:
 1. docker-compose up -d
 2. ./update-hosts.sh
